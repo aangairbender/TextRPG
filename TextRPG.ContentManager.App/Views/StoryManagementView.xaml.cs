@@ -16,9 +16,6 @@ using TextRPG.ContentManager.Core.ViewModels;
 
 namespace TextRPG.ContentManager.App.Views
 {
-    /// <summary>
-    /// Логика взаимодействия для StoryManagementView.xaml
-    /// </summary>
     [MvxViewFor(typeof(StoryManagementVM))]
     public partial class StoryManagementView : MvxWpfView
     {

@@ -16,7 +16,7 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow">
+        Title="Менеджер контента">
     <Grid>
     </Grid>
 </views:MvxWindow>

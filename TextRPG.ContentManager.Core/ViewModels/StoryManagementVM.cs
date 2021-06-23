@@ -1,10 +1,7 @@
 ﻿using MvvmCross.Commands;
+using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Text;
 using TextRPG.ContentManager.Core.Services;
 using TextRPG.Domain.Models;
 using TextRPG.Domain.Validators;
@@ -14,6 +11,7 @@ namespace TextRPG.ContentManager.Core.ViewModels
     public class StoryManagementVM : MvxViewModel
     {
         private readonly IDialogService _dialogService;
+        private readonly IMvxNavigationService _navigationService;
 
         private readonly Story _story;
         private bool _isStoryValid = false;
@@ -46,20 +44,24 @@ namespace TextRPG.ContentManager.Core.ViewModels
         public IMvxCommand LoadStoryCommand { get; private set; }
         public IMvxCommand SelectStoryFileCommand { get; private set; }
 
-        public StoryManagementVM(IDialogService dialogService)
+        public StoryManagementVM(IDialogService dialogService, IMvxNavigationService navigationService)
         {
             _dialogService = dialogService;
+            _navigationService = navigationService;
 
-            _story = new Story { Name = "" };
+            _story = new Story("");
             
             CreateStoryCommand = new MvxCommand(CreateStoryCommandHandler, () => _isStoryValid);
             LoadStoryCommand = new MvxCommand(LoadStoryCommandHandler);
             SelectStoryFileCommand = new MvxCommand(SelectStoryFileCommandHandler);
         }
 
-        private void CreateStoryCommandHandler()
+        private async void CreateStoryCommandHandler()
         {
-            _dialogService.ShowMessage($"{StoryName} {StoryFilename}");
+            _story.AddLocation(new Location("Деревня"));
+            _story.AddLocation(new Location("Лес"));
+            _story.AddLocation(new Location("Река"));
+            await _navigationService.Navigate<MainVM, Story>(_story);
         }
 
         private void LoadStoryCommandHandler()

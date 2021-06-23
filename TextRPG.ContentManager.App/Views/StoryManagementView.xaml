@@ -4,8 +4,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-        xmlns:local="clr-namespace:TextRPG.ContentManager.App.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-                  mc:Ignorable="d"
+        xmlns:local="clr-namespace:TextRPG.ContentManager.App.Views"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
         Height="Auto" Width="400">
     <Grid Margin="16">
         <Grid.RowDefinitions>
