@@ -9,9 +9,12 @@ namespace TextRPG.Domain.Models
     {
         public string Name { get; private set; }
 
+        public Place RootPlace { get; private set; }
+
         public Location(string name)
         {
             Name = name;
+            RootPlace = new Place(this, name);
         }
 
         #region ISupportTagging

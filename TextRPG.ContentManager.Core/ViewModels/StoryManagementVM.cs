@@ -58,9 +58,21 @@ namespace TextRPG.ContentManager.Core.ViewModels
 
         private async void CreateStoryCommandHandler()
         {
-            _story.AddLocation(new Location("Деревня"));
-            _story.AddLocation(new Location("Лес"));
-            _story.AddLocation(new Location("Река"));
+            var location1 = new Location("Деревня");
+            location1.RootPlace.AddChild(new Place(location1, "Колодец"));
+            var place1 = new Place(location1, "Мельница");
+            place1.AddChild(new Place(location1, "Амбар"));
+            location1.RootPlace.AddChild(place1);
+            location1.RootPlace.AddChild(new Place(location1, "Поле"));
+            var location2 = new Location("Лес");
+            location2.RootPlace.AddChild(new Place(location2, "Алтарь"));
+            location2.RootPlace.AddChild(new Place(location2, "Тропинка"));
+            var location3 = new Location("Река");
+            location3.RootPlace.AddChild(new Place(location3, "Вымостка"));
+            location3.RootPlace.AddChild(new Place(location3, "Каменистый берег"));
+            _story.AddLocation(location1);
+            _story.AddLocation(location2);
+            _story.AddLocation(location3);
             await _navigationService.Navigate<MainVM, Story>(_story);
         }
 

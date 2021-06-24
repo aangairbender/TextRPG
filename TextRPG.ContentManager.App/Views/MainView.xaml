@@ -7,6 +7,8 @@
         xmlns:local="clr-namespace:TextRPG.ContentManager.App.Views"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
+        MinWidth="800"
+        MinHeight="450"
         d:DesignHeight="450" d:DesignWidth="800">
 
     <UserControl.Resources>
@@ -52,10 +54,12 @@
 
                         <StackPanel>
                             <Border Style="{StaticResource HorizontalDividerBorder}"/>
-                            <ListBox ItemsSource="{Binding Story.Locations}">
+                            <ListBox
+                                ItemsSource="{Binding Story.Locations}"
+                                SelectedItem="{Binding SelectedLocation, Mode=TwoWay}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                        <TextBlock Text="{Binding Name}"/>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
@@ -93,7 +97,14 @@
                             <ListBox ItemsSource="{Binding Story.Locations}">
                                 <ListBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"></TextBlock>
+                                        <StackPanel>
+                                            <Button DockPanel.Dock="Right" Padding="4 0">
+                                                <materialDesign:PackIcon
+                                                    Kind="Plus"
+                                                    Width="24"
+                                                    Height="24"/>
+                                            </Button>   
+                                        </StackPanel>
                                     </DataTemplate>
                                 </ListBox.ItemTemplate>
                             </ListBox>
@@ -103,28 +114,23 @@
             </materialDesign:Card>
             
         </ScrollViewer>
-        <!--<TreeView Grid.Column="0">
-            <TreeViewItem>
-                <TreeViewItem.Header>
-                    <DockPanel HorizontalAlignment="Stretch" LastChildFill="True">
-                        <materialDesign:PackIcon
-                            Kind="Plus"
-                            DockPanel.Dock="Right"
-                            Width="24"
-                            Height="24"/>
-                        <TextBlock Text="Локации" TextAlignment="Center"/>
-                    </DockPanel>
-                </TreeViewItem.Header>
-                <ListBox ItemsSource="{Binding Story.Locations}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}"></TextBlock>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </TreeViewItem>
-            <TreeViewItem Header="Предметы"></TreeViewItem>
-            <TreeViewItem Header="Персонажи"></TreeViewItem>
-        </TreeView>-->
+        <StackPanel Grid.Column="1">
+            <TreeView ItemsSource="{Binding RootPlaceAsList}">
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}"/>
+                            <Button Padding="4 0">
+                                <materialDesign:PackIcon
+                                    Kind="Plus"
+                                    Width="24"
+                                    Height="24"/>
+                            </Button>
+                        </StackPanel>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+        </StackPanel>
     </Grid>
+        
 </views:MvxWpfView>
